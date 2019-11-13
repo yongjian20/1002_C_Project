@@ -156,12 +156,12 @@ int chatbot_do_exit(int inc, char *inv[], char *response, int n) {
 int chatbot_is_load(const char *intent) {
 	
 	char* KEYWORDS[1] = {"load"};
-  int i;
-  for (i=0; i<1; ++i){
-    if(compare_token(intent, KEYWORDS[i]) == 0){
-      return 1;
-    }
-  }
+	int i;
+	for (i=0; i<1; ++i){
+		if(compare_token(intent, KEYWORDS[i]) == 0){
+			return 1;
+		}
+	}
 	
 	return 0;
 	
@@ -199,12 +199,12 @@ int chatbot_do_load(int inc, char *inv[], char *response, int n) {
 int chatbot_is_question(const char *intent) {
 	
 	char* KEYWORDS[3] = {"what", "where", "who"};
-  int i;
-  for (i=0; i<3; ++i){
-    if(compare_token(intent, KEYWORDS[i]) == 0){
-      return 1;
-    }
-  }
+	int i;
+	for (i=0; i<3; ++i){
+		if(compare_token(intent, KEYWORDS[i]) == 0){
+			return 1;
+		}
+	}
 	
 	return 0;
 	
@@ -246,12 +246,12 @@ int chatbot_do_question(int inc, char *inv[], char *response, int n) {
 int chatbot_is_reset(const char *intent) {
 	
 	char* KEYWORDS[1] = {"reset"};
-  int i;
-  for (i=0; i<3; ++i){
-    if(compare_token(intent, KEYWORDS[i]) == 0){
-      return 1;
-    }
-  }
+	int i;
+	for (i=0; i<1; ++i){
+		if(compare_token(intent, KEYWORDS[i]) == 0){
+			return 1;
+		}
+	}
 	
 	return 0;
 	
@@ -276,7 +276,6 @@ int chatbot_do_reset(int inc, char *inv[], char *response, int n) {
 	 
 }
 
-
 /*
  * Determine whether an intent is SAVE.
  *
@@ -289,7 +288,13 @@ int chatbot_do_reset(int inc, char *inv[], char *response, int n) {
  */
 int chatbot_is_save(const char *intent) {
 	
-  /* To be implemented */
+	char* KEYWORDS[1] = {"save"};
+	int i;
+	for (i=0; i<3; ++i){
+		if(compare_token(intent, KEYWORDS[i]) == 0){
+			return 1;
+		}
+	}
 	
 	return 0;
 	
