@@ -56,4 +56,16 @@ void knowledge_reset();
 int knowledge_read(FILE *f);
 void knowledge_write(FILE *f);
 
+// Knowledge is stored as a struct
+typedef struct {
+	char intent[32];
+	char entity[64];
+	char response[128];
+} knowledge;
+
+// Initialise knowledge base capable of storing 1024 samples
+knowledge KNOWLEDGE_BASE[1024];
+// Variable keeps track of number of knowledge samples
+int N_KNOWLEDGE;
+
 #endif

@@ -71,12 +71,29 @@ int knowledge_put(const char *intent, const char *entity, const char *response) 
  *   f - the file
  *
  * Returns: the number of entity/response pairs successful read from the file
+ * If the file fails to open it returns 0
+ * It builds the knowledge base KNOWLEDGE_BASE that's stored in RAM
  */
 int knowledge_read(FILE *f) {
 	
-	/* to be implemented */
+	if (f == NULL) return 0;
+
+	char *line = NULL;
+	size_t len = 0;
+	ssize_t n_char;
+	int n_line = 0;
+	while ((n_char = getline(&line, &len, f)) != -1) {
+		strtok(line, "\n"); // Removing trailing \n
+		// Extracting tokens
+		strcpy(KNOWLEDGE_BASE[n_line].intent, 	strtok(line, ","));
+		strcpy(KNOWLEDGE_BASE[n_line].entity, 	strtok(NULL, ","));
+		strcpy(KNOWLEDGE_BASE[n_line].response,	strtok(NULL, ","));
+		++n_line;
+    }
+	// Updates N_KNOWLEDGE
+	N_KNOWLEDGE = n_line;
+	return n_line;
 	
-	return 0;
 }
 
 
@@ -97,7 +114,22 @@ void knowledge_reset() {
  *   f - the file
  */
 void knowledge_write(FILE *f) {
-	
-	/* to be implemented */
-	
+
+	char* delimiter = ",";
+	char* newline = "\n";
+
+	int n_line;
+	char* line = malloc(256);
+	knowledge buffer;
+	for (n_line = 0; n_line < N_KNOWLEDGE; ++n_line){
+		buffer = KNOWLEDGE_BASE[n_line];
+
+		// Create string
+		strcpy(line, buffer.intent); 	strcat(line, delimiter);
+		strcat(line, buffer.entity); 	strcat(line, delimiter);
+		strcat(line, buffer.response); 	strcat(line, newline);
+
+		// Writes string
+		fputs(line, f);
+	}
 }
